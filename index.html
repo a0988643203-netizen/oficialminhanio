@@ -1,1 +1,651 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yepnet - Internet de Alta Velocidade</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #1e3a8a;
+            --accent-color: #00b4d8;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+        
+        /* Navbar */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary-color) !important;
+        }
+        
+        .navbar-brand span {
+            color: var(--accent-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 100px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M0,0 L100,0 L100,100 Z" fill="white" opacity="0.05"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        /* Section Styling */
+        .section-title {
+            position: relative;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        
+        .section-title h2 {
+            display: inline-block;
+            padding-bottom: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Features */
+        .feature-box {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .feature-icon i {
+            font-size: 30px;
+            color: white;
+        }
+        
+        /* Plans */
+        .plan-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: none;
+            margin-bottom: 30px;
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .plan-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+        
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+        
+        .plan-price span {
+            font-size: 1rem;
+            font-weight: 400;
+        }
+        
+        .plan-popular {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .plan-popular::before {
+            content: 'MAIS POPULAR';
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 5px 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transform: rotate(45deg);
+        }
+        
+        /* Contact */
+        .contact-info {
+            background: linear-gradient(135deg, var(--secondary-color), var(--dark-color));
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            height: 100%;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo span {
+            color: var(--accent-color);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                padding: 80px 0 60px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><span>Yep</span>net</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Serviços</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#plans">Planos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1>Internet de alta velocidade para conectar seu mundo</h1>
+                    <p>A Yepnet oferece a melhor conexão com a internet de fibra óptica em Aracaju. Velocidade, estabilidade e suporte técnico especializado para você aproveitar ao máximo.</p>
+                    <a href="#plans" class="btn btn-light btn-lg me-3">Ver Planos</a>
+                    <a href="#contact" class="btn btn-outline-light btn-lg">Contato</a>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80" alt="Conexão de Internet" class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="section-title">
+                <h2>Sobre a Yepnet</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <p class="lead">A <strong>Yepnet Tecnologia LTDA</strong> é uma empresa sólida no mercado de provedores de internet, atuando desde 2018 com foco em qualidade e inovação.</p>
+                    <p>Com CNPJ <strong>31.931.410/0001-80</strong> e razão social Yepnet Tecnologia LTDA, estamos localizados em Aracaju, Sergipe, fornecendo acesso à internet de alta velocidade para residências e empresas.</p>
+                    <p>Nossa atividade principal é como provedor de acesso às redes de comunicações, sempre com a missão de conectar pessoas e negócios com a melhor tecnologia disponível.</p>
+                    <p>Com mais de 7 anos de experiência, estamos comprometidos em oferecer um serviço de qualidade, com suporte técnico ágil e atendimento personalizado.</p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="feature-box">
+                                <div class="feature-icon">
+                                    <i class="bi bi-calendar-check"></i>
+                                </div>
+                                <h4>7+ Anos de Mercado</h4>
+                                <p>Atuando desde 2018 com excelência e confiabilidade no mercado de telecomunicações.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="feature-box">
+                                <div class="feature-icon">
+                                    <i class="bi bi-speedometer2"></i>
+                                </div>
+                                <h4>Alta Velocidade</h4>
+                                <p>Conexão de fibra óptica com velocidade real e simétrica para download e upload.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="feature-box">
+                                <div class="feature-icon">
+                                    <i class="bi bi-headset"></i>
+                                </div>
+                                <h4>Suporte 24/7</h4>
+                                <p>Equipe técnica especializada disponível para atendimento a qualquer hora do dia.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="feature-box">
+                                <div class="feature-icon">
+                                    <i class="bi bi-shield-check"></i>
+                                </div>
+                                <h4>Confiabilidade</h4>
+                                <p>Serviço estável com garantia de uptime e qualidade na conexão.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-5 bg-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossos Serviços</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="bi bi-house-door"></i>
+                        </div>
+                        <h4>Internet Residencial</h4>
+                        <p>Conexão de alta velocidade para sua casa, ideal para streaming, jogos online, home office e muito mais.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="bi bi-building"></i>
+                        </div>
+                        <h4>Internet Empresarial</h4>
+                        <p>Soluções dedicadas para empresas com maior estabilidade, garantia de SLA e suporte prioritário.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="bi bi-wifi"></i>
+                        </div>
+                        <h4>Wi-Fi de Alta Performance</h4>
+                        <p>Instalação e configuração de roteadores de alta performance para cobertura completa em sua residência ou empresa.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plans Section -->
+    <section id="plans" class="py-5">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossos Planos</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="plan-card">
+                        <div class="plan-header">
+                            <h3>BÁSICO</h3>
+                            <p class="plan-price">R$ 79,90 <span>/mês</span></p>
+                        </div>
+                        <div class="card-body p-4">
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> 100 Mbps de velocidade</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Download e Upload</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Wi-Fi incluso</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Instalação gratuita</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Suporte técnico 24h</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-outline-primary w-100">Contratar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="plan-card plan-popular">
+                        <div class="plan-header">
+                            <h3>PREMIUM</h3>
+                            <p class="plan-price">R$ 119,90 <span>/mês</span></p>
+                        </div>
+                        <div class="card-body p-4">
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> 300 Mbps de velocidade</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Fibra óptica dedicada</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Roteador Wi-Fi 6</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Instalação gratuita</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Suporte prioritário</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> 2 meses de gratuidade</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-primary w-100">Contratar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="plan-card">
+                        <div class="plan-header">
+                            <h3>ULTRA</h3>
+                            <p class="plan-price">R$ 159,90 <span>/mês</span></p>
+                        </div>
+                        <div class="card-body p-4">
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> 600 Mbps de velocidade</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Fibra óptica empresarial</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Roteador Wi-Fi 6 Pro</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Instalação gratuita</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Suporte VIP 24/7</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> 3 meses de gratuidade</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-outline-primary w-100">Contratar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5 bg-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Entre em Contato</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-5 mb-4">
+                    <div class="contact-info">
+                        <h3 class="mb-4">Informações de Contato</h3>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="bi bi-geo-alt"></i>
+                            </div>
+                            <div>
+                                <h5>Endereço</h5>
+                                <p>Avenida Paulo VI, 426 - Loja 01<br>Inacio Barbosa<br>Aracaju/SE<br>CEP: 49040-460</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="bi bi-telephone"></i>
+                            </div>
+                            <div>
+                                <h5>Telefone</h5>
+                                <p>(79) 3012-4445</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="bi bi-envelope"></i>
+                            </div>
+                            <div>
+                                <h5>E-mail</h5>
+                                <p>contato@yepnet.com.br</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="bi bi-clock"></i>
+                            </div>
+                            <div>
+                                <h5>Horário de Atendimento</h5>
+                                <p>Segunda a Sexta: 8h às 18h<br>Sábado: 8h às 12h</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-7">
+                    <div class="bg-white p-4 rounded shadow">
+                        <h3 class="mb-4">Fale Conosco</h3>
+                        <form id="contact-form">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label">Nome Completo</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone" class="form-label">Telefone</label>
+                                    <input type="tel" class="form-control" id="phone" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Assunto</label>
+                                <select class="form-select" id="subject">
+                                    <option selected>Selecione um assunto</option>
+                                    <option value="plan">Contratação de plano</option>
+                                    <option value="support">Suporte técnico</option>
+                                    <option value="billing">Cobrança</option>
+                                    <option value="other">Outros</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Mensagem</label>
+                                <textarea class="form-control" id="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="footer-logo"><span>Yep</span>net</div>
+                    <p>Provedor de internet de alta velocidade com mais de 7 anos de experiência em Aracaju/SE. Conectando pessoas e negócios com tecnologia de ponta.</p>
+                    <div class="mt-4">
+                        <a href="#" class="text-white me-3"><i class="bi bi-facebook fs-5"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-instagram fs-5"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-whatsapp fs-5"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-linkedin fs-5"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-4">Links Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#home" class="text-white text-decoration-none">Início</a></li>
+                        <li class="mb-2"><a href="#about" class="text-white text-decoration-none">Sobre Nós</a></li>
+                        <li class="mb-2"><a href="#services" class="text-white text-decoration-none">Serviços</a></li>
+                        <li class="mb-2"><a href="#plans" class="text-white text-decoration-none">Planos</a></li>
+                        <li class="mb-2"><a href="#contact" class="text-white text-decoration-none">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-4">Dados da Empresa</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><strong>Razão Social:</strong> Yepnet Tecnologia LTDA</li>
+                        <li class="mb-2"><strong>CNPJ:</strong> 31.931.410/0001-80</li>
+                        <li class="mb-2"><strong>Fundada em:</strong> 05/11/2018</li>
+                        <li class="mb-2"><strong>Atividade:</strong> Provedores de acesso às redes de comunicações</li>
+                        <li class="mb-2"><strong>Situação Cadastral:</strong> Ativa</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="mb-0">&copy; 2024 Yepnet Tecnologia LTDA. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+            this.reset();
+        });
+        
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if(window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
